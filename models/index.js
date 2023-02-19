@@ -21,7 +21,7 @@ Product.belongsToMany(Tag, {
     unique: false
   },
   // Define an alias for when data is retrieved
-  as: 'product_tag_link'
+  as: 'tags'
 });
 
 // Tags belongToMany Products (through ProductTag)
@@ -32,21 +32,9 @@ Tag.belongsToMany(Product, {
     unique: false
   },
   // Define an alias for when data is retrieved
-  as: 'tag_product_link'
+  as: 'products'
 });
 
-/*
-Reader.hasOne(LibraryCard, {
-  foreignKey: 'reader_id',
-  onDelete: 'CASCADE',
-});
-
-// A reader can have many books
-Reader.hasMany(Book, {
-  foreignKey: 'reader_id',
-  onDelete: 'CASCADE',
-});
-*/
 module.exports = {
   Product,
   Category,

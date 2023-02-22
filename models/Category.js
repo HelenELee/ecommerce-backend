@@ -18,7 +18,33 @@ Category.init(
       allowNull: false
     }
   },
+  
   {
+    /*
+    hooks: {
+      beforeDestroy: async (category) => {
+        try {
+          console.log("INSIDE BEFORE DESTROY");
+          const updatedData = await Product.update(
+            {
+              category_id: null,
+            },
+            {
+              where: {
+                category_id: category.id,
+              },
+            }
+            );
+          return updatedData;
+        } catch (err) {
+          console.log(err);
+          return err;
+        }
+      },
+      
+    },
+    */
+    
     sequelize,
     timestamps: false,
     freezeTableName: true,

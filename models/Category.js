@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-
+//connect to mysql
 const sequelize = require('../config/connection.js');
 
 class Category extends Model {}
@@ -19,36 +19,11 @@ Category.init(
     }
   },
   
-  {
-    /*
-    hooks: {
-      beforeDestroy: async (category) => {
-        try {
-          console.log("INSIDE BEFORE DESTROY");
-          const updatedData = await Product.update(
-            {
-              category_id: null,
-            },
-            {
-              where: {
-                category_id: category.id,
-              },
-            }
-            );
-          return updatedData;
-        } catch (err) {
-          console.log(err);
-          return err;
-        }
-      },
-      
-    },
-    */
-    
+  {    
     sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
+    timestamps: false, //no timestamp included in table
+    freezeTableName: true, //no plurals for table name
+    underscored: true, //use snake case
     modelName: 'category',
   }
 );

@@ -10,18 +10,11 @@ Product.belongsTo(Category, {
   foreignKey: {  
     allowNull: true 
   },  
-  //onDelete: 'SET NULL',
-  hooks: true,
-  //individualHooks: true
- /* onDelete: 'CASCADE',
-  hooks: true,*/
+  /*hooks: true, - testing hooks*/
 });
 // Categories have many Products
 Category.hasMany(Product, {
   foreignKey: 'category_id',
-  hooks: true,
-  /*onDelete: 'CASCADE',
-  hooks: true,*/
 });
 // Products belongToMany Tags (through ProductTag)
 Product.belongsToMany(Tag, {

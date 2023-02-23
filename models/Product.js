@@ -42,23 +42,28 @@ Product.init(
         model: 'category',
         key: 'id',
       },
-      /*
-      onDelete: 'CASCADE',
-      hooks: true,
-      */
-      /*
-      validate: {
-        notEmpty: true,
-      } 
-      */
+      
     }
 
   },
   {
+    /* TESTING HOOKS
+    hooks: {
+      beforeCreate: async (product) => {
+        try {
+          console.log("HOOK Before CREATE");
+          console.log(product);
+        }
+        catch {
+
+        }
+      }
+    },
+    */
     sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
+    timestamps: false, //no timestamps
+    freezeTableName: true, //no plurals in table name
+    underscored: true, //snake_case
     modelName: 'product',
   }
 );

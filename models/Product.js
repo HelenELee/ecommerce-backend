@@ -42,6 +42,7 @@ Product.init(
         model: 'category',
         key: 'id',
       },
+      allowNull: true,
       
     }
 

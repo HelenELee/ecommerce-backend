@@ -8,9 +8,9 @@ router.get('/', async (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   try {
+    //get product and join with Category and Tag - need Product Tag for that latter one
     const productData = await Product.findAll({
       include: [{ model: Category }, { model: Tag, through: ProductTag, as: 'tags'}],
-      //include: [{ model: Category },],
     });
 
     if (!productData) {
@@ -31,6 +31,7 @@ router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
+    //get Product and join with category and Tag
     const productData = await Product.findByPk(req.params.id, {
       include: [{ model: Category }, { model: Tag, through: ProductTag, as: 'tags'}],
       //include: [{ model: Category },],
@@ -84,6 +85,7 @@ router.post('/', (req, res) => {
 // update product
 router.put('/:id', (req, res) => {
   // update product data
+  //first check product exists
   Product.findByPk(req.params.id)
   .then((product) => {
     console.log(product);
@@ -102,13 +104,6 @@ router.put('/:id', (req, res) => {
     })
   }
   )
-/*
-  Product.update(req.body, {
-    where: {
-      id: req.params.id,
-    },
-  })
- */
     .then((product) => {
       // find all associated tags from ProductTag
       return ProductTag.findAll({ where: { product_id: req.params.id } });
@@ -126,13 +121,11 @@ router.put('/:id', (req, res) => {
           };
         });
     
-        console.log("new tags = " + newProductTags);
       // figure out which ones to remove
       const productTagsToRemove = productTags
         .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
         .map(({ id }) => id);
       
-      console.log("remove = " + productTagsToRemove);
 
       // run both actions
       return Promise.all([
@@ -150,7 +143,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', async(req, res) => {
   // delete one product by its `id` value
   try {
-    console.log("Delete one category");
+    //get product using params passed in
     const productData = await Product.destroy({
       where : {
         id: req.params.id,
